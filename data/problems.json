@@ -1,0 +1,1 @@
+[{"description":"一个栈的进栈序列是 a ， b ， c ， d ， e ，则栈的不可能的输出序列是 。","items": {"A":"edcba","B":"decba","C":"decba","D":"decba"},"answer": "C","settings":{"company_type":"互联网公司","positon_type":"岗位类型","tags":["栈","堆"]}}]

@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>系统管理员</title>
+    <!-- BOOTSTRAP STYLES-->
+    <link href="assets/css/bootstrap.css" rel="stylesheet" />
+    <!-- FONTAWESOME STYLES-->
+    <link href="assets/css/font-awesome.css" rel="stylesheet" />
+    <!-- CUSTOM STYLES-->
+    <link href="assets/css/custom.css" rel="stylesheet" />
+    <!-- GOOGLE FONTS-->
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+    <script src="assets/js/jquery-1.10.2.js"></script>
+    <!-- BOOTSTRAP SCRIPTS -->
+    <script src="assets/js/bootstrap.min.js"></script>
+    <!-- METISMENU SCRIPTS -->
+    <script src="assets/js/jquery.metisMenu.js"></script>
+
+    <link rel="stylesheet" type="text/css" media="all" href="daterangepicker/daterangepicker-bs3.css">
+    <script type="text/javascript" src="daterangepicker/moment.js"></script>
+    <script type="text/javascript" src="daterangepicker/daterangepicker.js"></script>
+</head>
+<body>
+<div id="wrapper">
+    <nav class="navbar navbar-default navbar-cls-top " role="navigation" style="margin-bottom: 0">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="index.html">系统管理员</a>
+        </div>
+        <div style="color: white;
+padding: 15px 50px 5px 50px;
+float: right;
+font-size: 16px;">  &nbsp; <a href="#" class="btn btn-danger square-btn-adjust">Logout</a> </div>
+    </nav>
+    <!-- /. NAV TOP  -->
+    <nav class="navbar-default navbar-side" role="navigation">
+        <div class="sidebar-collapse">
+            <ul class="nav" id="main-menu">
+                <li class="text-center">
+                    <img src="assets/img/find_user.png" class="user-image img-responsive"/>
+                </li>
+                <li>
+                    <a  href="recruit-produce.html"><i class="fa fa-dashboard fa-3x"></i>发布考试</a>
+                </li>
+                <li>
+                    <a  href="recruit-view.html"><i class="fa fa-desktop fa-3x"></i>查看题目</a>
+                </li>
+                <li>
+                    <a  href="recruit-preview.html"><i class="fa fa-desktop fa-3x"></i>试卷预览</a>
+                </li>
+                <li>
+                    <a  href="recruit-result.html"><i class="fa fa-desktop fa-3x"></i>考试结果</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <!-- /. NAV SIDE  -->
+    <div id="page-wrapper" >
+        <div id="page-inner">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2>发布考试</h2>
+                </div>
+            </div>
+            <!-- /. ROW  -->
+            <hr />
+
+            <div class = "row">
+                <div class="col-md-3 col-sm-3"></div>
+                <div class="col-md-6 col-sm-6">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            填写信息
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <form role="form">
+                                <div class="form-group">
+                                    <label>&nbsp;公司类型</label>
+                                    <select class="form-control">
+                                        <option>互联网公司</option>
+                                        <option>广告公司</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>&nbsp;部门</label>
+                                    <select class="form-control">
+                                        <option>研发部</option>
+                                        <option>产品部</option>
+                                        <option>设计部</option>
+                                        <option>游戏部</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>&nbsp;岗位</label>
+                                    <select class="form-control">
+                                        <option>研发工程师Java</option>
+                                        <option>前端开发工程师</option>
+                                        <option>安全工程师</option>
+                                        <option>测试开发工程师</option>
+                                    </select>
+                                </div>
+                                    <div class="form-group">
+                                        <label>&nbsp;岗位</label>
+                                        <select class="form-control">
+                                            <option>研发工程师Java</option>
+                                            <option>前端开发工程师</option>
+                                            <option>安全工程师</option>
+                                            <option>测试开发工程师</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label" for="reservationtime">&nbsp;考试时间</label>
+                                        <div class="controls">
+                                            <div class="input-prepend input-group">
+                                                <span class="add-on input-group-addon"><i class="glyphicon glyphicon-calendar fa fa-calendar"></i></span>
+                                                <input type="text" style="width: 400px" name="reservation" id="reservationtime" class="form-control" value="08/01/2013 1:00 PM - 08/01/2013 1:30 PM"  class="span4"/>
+                                            </div>
+                                        </div>
+                                        <script type="text/javascript">
+                                                $(document).ready(function() {
+                                                    $('#reservationtime').daterangepicker({
+                                                        timePicker: true,
+                                                        timePickerIncrement: 30,
+                                                        format: 'MM/DD/YYYY h:mm A'
+                                                    }, function(start, end, label) {
+                                                        console.log(start.toISOString(), end.toISOString(), label);
+                                                    });
+                                                });
+                                        </script>
+                                    </div>
+
+                                <button type="submit" class="btn btn-default">提交</button>
+                                <button type="reset" class="btn btn-primary">重置</button>
+                          </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /. ROW  -->
+        </div>
+        <!-- /. PAGE INNER  -->
+    </div>
+    <!-- /. PAGE WRAPPER  -->
+</div>
+<!-- /. WRAPPER  -->
+<!-- SCRIPTS -AT THE BOTOM TO REDUCE THE LOAD TIME-->
+<!-- JQUERY SCRIPTS -->
+
+
+
+</body>
+</html>
