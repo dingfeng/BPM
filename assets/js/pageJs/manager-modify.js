@@ -1,6 +1,10 @@
 domain = "http://106.14.222.99:8080/Entity/U1c601c1d10384f/test3/";
 problem = {};
-
+selectData = {};
+globalCompanyType = {};
+globalDepartment = {};
+globalPosition = {};
+globalTag = {};
 function resetSelects() {
     //初始化设置页面
     $("#companyType").html("");
@@ -247,7 +251,8 @@ function addPosition() {
                     );
                 },
                 dataType: "json",
-                contentType: "application/json"
+                contentType: "application/json",
+                async:false
             });
         }
     }, dataType = "json");
@@ -314,7 +319,7 @@ $.get(problemUrl, function (data, status) {
         problem = data;
         $("#description").val(problem["description"]);
         var items = problem["item"];
-        var itemElementIds = ["#ItemA", "ItemB", "ItemC", "ItemD"];
+        var itemElementIds = ["#ItemA", "#ItemB", "#ItemC", "#ItemD"];
         for (var i in items) {
             var item = items[i];
             var itemElement = $(itemElementIds[i]);
@@ -342,3 +347,70 @@ $.get(problemUrl, function (data, status) {
         $("#tags").val(tagIds);
     }
 }, dataType = "json");
+
+
+//添加取消键的监听
+$("#cancelButton").click(function () {
+    window.location.reload();
+});
+
+//添加保存键的监听
+$("#saveButton").click(function () {
+    var description = $("#description").val();  //描述
+    problem["description"] = description;
+    var items = problem["item"];
+    items[0]["content"] = $("#ItemA").val();
+    items[1]["content"] = $("#ItemB").val();
+    items[2]["content"] = $("#ItemC").val();
+    items[3]["content"] = $("#ItemD").val();
+    //逐个修改item
+    for (var i in items) {
+        var item = items[i];
+        //发送put请求
+        $.ajax({
+            type: 'PUT',
+            url: domain + "Item/" + item["id"],
+            data: JSON.stringify(item),
+            success: function (result, status) {
+                console.log("update item result=" + JSON.stringify(result));
+                console.log("status=" + status);
+            },
+            dataType: "json",
+            contentType: "application/json",
+            async:false
+        });
+    }
+    var answerNo = $("input[type='radio']:checked").val();
+    var answer = items[answerNo];
+    problem["answer"] = answer;
+    var companyTypeId = $("#companyType").val();
+    problem["companytype"] = {"id": companyTypeId};
+    var departmentId = $("#department").val();
+    problem["department"] = {"id": departmentId};
+    var positionId = $("#position").val();
+    problem["position"] = {"id": positionId};
+    var tagIds = $("#tags").val();
+    var hastag = [];
+    for (var i in tagIds) {
+        var tagId = tagIds[i];
+        hastag.push({"id": tagId});
+    }
+    problem["hastag"] = hastag;
+    $.ajax({
+        type: 'PUT',
+        url: domain + "Problem/" + id,
+        data: JSON.stringify(problem),
+        success: function (result, status) {
+            console.log("update problem result=" + JSON.stringify(result));
+            console.log("status=" + status);
+            if (status == "success") {
+                alert("修改成功！");
+                window.location.href = "manager-search.html";
+            }
+        },
+        dataType: "json",
+        contentType: "application/json"
+    });
+
+});
+

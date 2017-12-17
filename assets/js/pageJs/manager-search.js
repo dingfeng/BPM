@@ -3,13 +3,13 @@ var searchTemplate = '<div class="col-md-3 col-sm-3"></div>\n' +
     '                    <div class="panel panel-default">\n' +
     '                        <div class="panel-body">\n' +
     '                            <ul class="nav nav-pills">\n' +
-    '                                <li class="active"><a href="#description-pills" data-toggle="tab">描述</a>\n' +
+    '                                <li class="active"><a id="a-description" href="#description-pills" data-toggle="tab">描述</a>\n' +
     '                                </li>\n' +
-    '                                <li class=""><a href="#options-pills" data-toggle="tab">选项</a>\n' +
+    '                                <li class=""><a id="a-options" href="#options-pills" data-toggle="tab">选项</a>\n' +
     '                                </li>\n' +
-    '                                <li class=""><a href="#answer-pills" data-toggle="tab">答案</a>\n' +
+    '                                <li class=""><a id="a-answer" href="#answer-pills" data-toggle="tab">答案</a>\n' +
     '                                </li>\n' +
-    '                                <li class=""><a href="#settings-pills" data-toggle="tab">设置</a>\n' +
+    '                                <li class=""><a id="a-settings" href="#settings-pills" data-toggle="tab">设置</a>\n' +
     '                                </li>\n' +
     '                            </ul>\n' +
     '\n' +
@@ -73,12 +73,27 @@ $.get(problemUrl, function (data, status) {
     }
 }, dataType = "json");
 
+tabPageCount = 0;
 function createSearchResult(searchedProblem) {
     var element = document.createElement("div");
     $("#page-inner").append(element);
     $(element).addClass("row");
     $(element).addClass("searchrow");
     $(element).html(searchTemplate);
+    //设置标签页切换
+
+    var pageIds = ["description-pills", "options-pills", "answer-pills", "settings-pills"];
+    var aIds = ["a-description", "a-options", "a-answer", "a-settings"];
+    for (var i in pageIds) {
+        var pageId = pageIds[i];
+        var aId = aIds[i];
+        var aElement = $("#" + aId);
+        aElement.attr("href", "#" + pageId + "-" + tabPageCount);
+        aElement.removeAttr("id");
+        $("#" + pageId).attr("id", pageId + "-" + tabPageCount);
+    }
+    tabPageCount++;
+
     var descriptionElement = $("#emptyDescription");
     descriptionElement.text(searchedProblem["description"]);
     descriptionElement.removeAttr("id");
@@ -91,7 +106,7 @@ function createSearchResult(searchedProblem) {
     var itemCElement = $("#emptyItemC");
     itemCElement.text(searchedProblem["item"][2]["content"]);
     itemCElement.removeAttr("id");
-    var itemDElement = $("#emptyItemC");
+    var itemDElement = $("#emptyItemD");
     itemDElement.text(searchedProblem["item"][3]["content"]);
     itemDElement.removeAttr("id");
     var companyType = searchedProblem["companytype"]["name"];
@@ -135,7 +150,7 @@ $("#searchButton").click(function () {
     for (var i in allProblems) {
         var problem = allProblems[i];
         //不存在 string.contains 使用indexOf代替
-        if (searchText.length == 0 || problem["description"].indexOf(searchText) > 0) {
+        if (searchText.length == 0 || problem["description"].indexOf(searchText) > -1) {
             createSearchResult(problem);
         }
     }
