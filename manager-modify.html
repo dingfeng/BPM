@@ -82,49 +82,49 @@ font-size: 16px;">  &nbsp; <a href="#" class="btn btn-danger square-btn-adjust">
                             <div class="tab-content">
                                 <div class="tab-pane fade active in" id="description-pills">
                                     <div class="form-group">
-                                        <textarea class="form-control" rows="4"></textarea>
+                                        <textarea id="description" class="form-control" rows="4"></textarea>
                                     </div>
                                 </div>
                                 <div class="tab-pane fade" id="options-pills">
-                                    <form role="form">
-                                        <div class="form-group input-group">
-                                            <span class="input-group-addon">选项 A</span>
-                                            <input type="text" class="form-control" placeholder="请输入选项A">
-                                        </div>
-                                        <div class="form-group input-group">
-                                            <span class="input-group-addon">选项 B</span>
-                                            <input type="text" class="form-control" placeholder="请输入选项B">
-                                        </div>
-                                        <div class="form-group input-group">
-                                            <span class="input-group-addon">选项 C</span>
-                                            <input type="text" class="form-control" placeholder="请输入选项C">
-                                        </div>
-                                        <div class="form-group input-group">
-                                            <span class="input-group-addon">选项 D</span>
-                                            <input type="text" class="form-control" placeholder="请输入选项D">
-                                        </div>
-                                    </form>
+
+                                    <div class="form-group input-group">
+                                        <span class="input-group-addon">选项 A</span>
+                                        <input id="ItemA" type="text" class="form-control" placeholder="请输入选项A">
+                                    </div>
+                                    <div class="form-group input-group">
+                                        <span class="input-group-addon">选项 B</span>
+                                        <input id="ItemB" type="text" class="form-control" placeholder="请输入选项B">
+                                    </div>
+                                    <div class="form-group input-group">
+                                        <span class="input-group-addon">选项 C</span>
+                                        <input id="ItemC" type="text" class="form-control" placeholder="请输入选项C">
+                                    </div>
+                                    <div class="form-group input-group">
+                                        <span class="input-group-addon">选项 D</span>
+                                        <input id="ItemD" type="text" class="form-control" placeholder="请输入选项D">
+                                    </div>
+
                                 </div>
                                 <div class="tab-pane fade" id="answer-pills">
                                     <div class="form-group">
                                         <div class="radio">
                                             <label>
-                                                <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked />选项A
+                                                <input type="radio" name="optionsRadios" id="optionsRadio0" value="0" checked />选项A
                                             </label>
                                         </div>
                                         <div class="radio">
                                             <label>
-                                                <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2"/>选项B
+                                                <input type="radio" name="optionsRadios" id="optionsRadio1" value="1"/>选项B
                                             </label>
                                         </div>
                                         <div class="radio">
                                             <label>
-                                                <input type="radio" name="optionsRadios" id="optionsRadios3" value="option3"/>选项C
+                                                <input type="radio" name="optionsRadios" id="optionsRadio2" value="2"/>选项C
                                             </label>
                                         </div>
                                         <div class="radio">
                                             <label>
-                                                <input type="radio" name="optionsRadios" id="optionsRadios3" value="option3"/>选项D
+                                                <input type="radio" name="optionsRadios" id="optionsRadio3" value="3"/>选项D
                                             </label>
                                         </div>
                                     </div>
@@ -132,34 +132,66 @@ font-size: 16px;">  &nbsp; <a href="#" class="btn btn-danger square-btn-adjust">
                                 <div class="tab-pane fade " id="settings-pills">
                                     <div class="form-group">
                                         <label>公司类型</label>
-                                        <select class="form-control">
+                                        <select class="form-control" id="companyType">
                                             <option>互联网公司</option>
                                             <option>广告公司</option>
                                         </select>
+                                        <div class="input-group">
+                                            <input name="companyType" type="text" class="form-control" placeholder="不存在时添加" />
+                                            <span class="form-group input-group-btn">
+                                                 <button class="btn btn-default" type="button" onclick="addCompanyType()">添加</button>
+                                                 </span>
+                                        </div>
+
+                                        <br/>
                                         <label>部门</label>
-                                        <select class="form-control">
+                                        <select class="form-control" id="department">
                                             <option>研发部</option>
                                             <option>产品部</option>
                                             <option>设计部</option>
                                             <option>游戏部</option>
                                         </select>
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" placeholder="不存在时添加" name="department"/>
+                                            <span class="form-group input-group-btn">
+                                                 <button class="btn btn-default" type="button" onclick="addDepartment()">添加</button>
+                                                 </span>
+                                        </div>
+
+                                        <br/>
                                         <label>岗位</label>
-                                        <select class="form-control">
+                                        <select class="form-control" id="position">
                                             <option>研发工程师Java</option>
                                             <option>前端开发工程师</option>
                                             <option>安全工程师</option>
                                             <option>测试开发工程师</option>
                                         </select>
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" placeholder="不存在时添加" name="position"/>
+                                            <span class="form-group input-group-btn">
+                                                 <button class="btn btn-default" type="button" onclick="addPosition()">添加</button>
+                                                 </span>
+                                        </div>
+
+                                        <br/>
                                         <label>标签（可多选）</label>
-                                        <select multiple class="form-control">
+                                        <select multiple class="form-control" id="tags">
                                             <option>栈</option>
                                             <option>堆</option>
                                             <option>多线程</option>
                                             <option>锁</option>
                                             <option>jvm</option>
                                         </select>
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" placeholder="不存在时添加" name="tag"/>
+                                            <span class="form-group input-group-btn">
+                                                 <button class="btn btn-default" type="button" onclick="addTag()">添加</button>
+                                                 </span>
+                                        </div>
                                     </div>
+
                                 </div>
+
                             </div>
                         </div>
                     </div>
@@ -168,8 +200,8 @@ font-size: 16px;">  &nbsp; <a href="#" class="btn btn-danger square-btn-adjust">
             <div class = "row">
                 <div class="col-md-3"></div>
                 <div class="col-md-3">
-                    <button type="button" class="btn btn-default">取消</button>
-                    <button type="button" class="btn btn-default">保存</button>
+                    <button id="cancelButton" type="button" class="btn btn-default">取消</button>
+                    <button id="saveButton" type="button" class="btn btn-default">保存</button>
                 </div>
             </div>
             <!-- /. ROW  -->
@@ -186,6 +218,8 @@ font-size: 16px;">  &nbsp; <a href="#" class="btn btn-danger square-btn-adjust">
 <script src="assets/js/bootstrap.min.js"></script>
 <!-- METISMENU SCRIPTS -->
 <script src="assets/js/jquery.metisMenu.js"></script>
+<!-- USER SCRIPTS -->
+<script src="assets/js/pageJs/manager-modify.js"></script>
 <!-- CUSTOM SCRIPTS -->
 <script src="assets/js/custom.js"></script>
 

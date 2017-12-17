@@ -1,11 +1,5 @@
 domain = "http://106.14.222.99:8080/Entity/U1c601c1d10384f/test3/";
-selectData = {};
-globalCompanyType = {};
-globalDepartment = {};
-globalPosition = {};
-globalTag = {};
-
-//重置select元素
+problem = {};
 
 function resetSelects() {
     //初始化设置页面
@@ -302,83 +296,49 @@ function addTag() {
     });
 }
 
-
-function getById(tableName, id) {
-    var entity = {};
-    var url = domain + tableName + "/" + id;
-    $.ajax(
-        {
-            url: url,
-            type: "GET",
-            async: false,
-            success: function (data, status) {
-                entity = data;
-            }
-        }
-    );
-    return entity;
+//获取url中的参数
+function getUrlParam(name) {
+    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+    var r = window.location.search.substr(1).match(reg);  //匹配目标参数
+    if (r != null) return unescape(r[2]);
+    return null; //返回参数值
 }
 
-//提交表单
-$("#submit").click(function () {
-    var description = $("#description").val();  //描述
-    var itemA = {"item_no": 0, "content": $("#ItemA").val()};
-    var itemB = {"item_no": 1, "content": $("#ItemB").val()};
-    var itemC = {"item_no": 2, "content": $("#ItemC").val()};
-    var itemD = {"item_no": 3, "content": $("#ItemD").val()};
-    var items = [itemA, itemB, itemC, itemD];
-    var itemsAddResult = [];
-    for (var i in items) {
-        var item = items[i];
-        //添加item
-        $.ajax({
-            type: 'POST',
-            url: domain + "Item/",
-            data: JSON.stringify(item),
-            success: function (result, status) {
-                if (status == "success") {
-                    console.log("succeed to add item result = " + JSON.stringify(result));
-                    itemsAddResult.push(result);
-                }
-            },
-            dataType: "json",
-            contentType: "application/json",
-            async: false
-        });
+var id = getUrlParam("id");
+console.log("problem id=" + id);
+//根据id从服务器查询problem
+var problemUrl = domain + "Problem/" + id;
+$.get(problemUrl, function (data, status) {
+    if (status == "success") {
+        console.log("data=" + JSON.stringify(data));
+        problem = data;
+        $("#description").val(problem["description"]);
+        var items = problem["item"];
+        var itemElementIds = ["#ItemA", "ItemB", "ItemC", "ItemD"];
+        for (var i in items) {
+            var item = items[i];
+            var itemElement = $(itemElementIds[i]);
+            itemElement.val(item["content"]);
+        }
+        var answerNo = problem["answer"]["item_no"];
+        $("input[type='radio']").get(answerNo).checked = true;
+        var companyTypeId = problem["companytype"]["id"];
+        $("#companyType").val(companyTypeId);
+        companyTypeChanged()
+        var departmentId = problem["department"]["id"];
+        $("#department").val(departmentId);
+        departmentChanged();
+        var positionId = problem["position"]["id"];
+        $("#position").val(positionId);
+        positionChanged();
+        var hastag = problem["hastag"];
+        //获得tagIds数组
+        var tagIds = [];
+        $("#tags").val([]);
+        for (var i in hastag) {
+            var tagId = hastag[i]["id"];
+            tagIds.push(tagId);
+        }
+        $("#tags").val(tagIds);
     }
-    //构建problem
-    var answerNo = $("input[type='radio']:checked").val();
-    var answer = itemsAddResult[answerNo];
-    var problem = {};
-    problem["description"] = description;
-    problem["item"] = itemsAddResult;
-    problem["answer"] = answer;
-    var companyTypeId = $("#companyType").val();
-    problem["companytype"] = getById("Companytype", companyTypeId);
-    var departmentId = $("#department").val();
-    problem["department"] = getById("department", departmentId);
-    var positionId = $("#position").val();
-    problem["position"] = getById("position", positionId);
-    var tagIds = $("#tags").val();
-    var hastag = [];
-    for (var i in tagIds) {
-        var tagId = tagIds[i];
-        hastag.push({"id": tagId});
-    }
-    problem["hastag"] = hastag;
-    $.ajax({
-        type: 'POST',
-        url: domain + "Problem/",
-        data: JSON.stringify(problem),
-        success: function (result, status) {
-            if (status == "success") {
-                console.log("succeed to add item result = " + JSON.stringify(result));
-                alert("添加成功");
-                window.location.reload();
-            }
-        },
-        dataType: "json",
-        contentType: "application/json"
-    });
-
-});
+}, dataType = "json");

@@ -81,9 +81,9 @@ font-size: 16px;">  &nbsp; <a href="#" class="btn btn-danger square-btn-adjust">
                                     <form role="form">
                                         <br />
                                         <div class="input-group">
-                                            <input type="text" class="form-control" />
+                                            <input type="text" class="form-control" name="searchInput" />
                                             <span class="form-group input-group-btn">
-                                            <button class="btn btn-default" type="button">搜索</button>
+                                            <button class="btn btn-default" type="button" id="searchButton">搜索</button>
                                             </span>
                                         </div>
                                     </form>
@@ -95,7 +95,7 @@ font-size: 16px;">  &nbsp; <a href="#" class="btn btn-danger square-btn-adjust">
                     </div>
                 </div>
             </div>
-            <div class = "row">
+           <!-- <div  class = "row searchrow" hidden="true">
                 <div class="col-md-3 col-sm-3"></div>
                 <div class="col-md-6 col-sm-6">
                     <div class="panel panel-default">
@@ -113,24 +113,24 @@ font-size: 16px;">  &nbsp; <a href="#" class="btn btn-danger square-btn-adjust">
 
                             <div class="tab-content">
                                 <div class="tab-pane fade active in" id="description-pills">
-                                    <p>一个栈的进栈序列是 a ， b ， c ， d ， e ，则栈的不可能的输出序列是 。</p>
+                                    <p id="emptyDescription">一个栈的进栈序列是 a ， b ， c ， d ， e ，则栈的不可能的输出序列是 。</p>
                                 </div>
                                 <div class="tab-pane fade" id="options-pills">
                                     <div class="row">
                                         <div class="col-md-1"><p>A.</p></div>
-                                        <div class="col-md-11"><p>edcba</p></div>
+                                        <div class="col-md-11" ><p id="emptyItemA">edcba</p></div>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-1"><p>B.</p></div>
-                                        <div class="col-md-11"><p>decba</p></div>
+                                        <div class="col-md-11"><p id="emptyItemB">decba</p></div>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-1"><p>C.</p></div>
-                                        <div class="col-md-11"><p>dceab</p></div>
+                                        <div class="col-md-11"><p id="emptyItemC">dceab</p></div>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-1"><p>D.</p></div>
-                                        <div class="col-md-11"><p>abcde</p></div>
+                                        <div class="col-md-11"><p id="emptyItemD">abcde</p></div>
                                     </div>
                                 </div>
                                 <div class="tab-pane fade" id="answer-pills">
@@ -139,20 +139,27 @@ font-size: 16px;">  &nbsp; <a href="#" class="btn btn-danger square-btn-adjust">
                                 <div class="tab-pane fade " id="settings-pills">
                                     <div class="row">
                                         <div class="col-md-2"><p>公司类型</p></div>
-                                        <div class="col-md-10">  <p>互联网公司</p> </div>
+                                        <div class="col-md-10">  <p id="emptyCompanyType">互联网公司</p> </div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-md-2"><p>岗位类型</p></div>
-                                        <div class="col-md-10">  <p>技术</p> </div>
+                                        <div class="col-md-2"><p>部门</p></div>
+                                        <div class="col-md-10">  <p id="emptyDepartment">研发部</p> </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-2"><p>岗位</p></div>
+                                        <div class="col-md-10"> <p id="emptyPosition">技术</p> </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-2"><p>标签</p></div>
+                                        <div class="col-md-10"> <p id="emptyTags">堆，栈</p> </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-3 col-sm-3"><button type="submit" class="btn btn-default">修改</button></div>
-
-            </div>
+                <div class="col-md-3 col-sm-3"><button type="submit" class="btn btn-default" id="empty">修改</button></div>
+            </div>-->
             <!-- /. ROW  -->
         </div>
         <!-- /. PAGE INNER  -->
@@ -167,6 +174,8 @@ font-size: 16px;">  &nbsp; <a href="#" class="btn btn-danger square-btn-adjust">
 <script src="assets/js/bootstrap.min.js"></script>
 <!-- METISMENU SCRIPTS -->
 <script src="assets/js/jquery.metisMenu.js"></script>
+<!-- USER SCRIPTS -->
+<script src="assets/js/pageJs/manager-search.js"></script>
 <!-- CUSTOM SCRIPTS -->
 <script src="assets/js/custom.js"></script>
 
