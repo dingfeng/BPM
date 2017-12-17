@@ -1,1 +1,11 @@
-[{"description":"一个栈的进栈序列是 a ， b ， c ， d ， e ，则栈的不可能的输出序列是 。","items": {"A":"edcba","B":"decba","C":"decba","D":"decba"},"answer": "C","settings":{"company_type":"互联网公司","positon_type":"岗位类型","tags":["栈","堆"]}}]
+[
+  {
+  "description":"批量导入题目",
+  "item": ["批量导入选项A","批量导入选项B","批量导入选项C","批量导入选项D"],
+  "answer": 0,
+  "companytype": "互联网公司",
+  "department":"研发部",
+  "position":"研发工程师java",
+  "tags":["栈","堆"]
+  }
+]
