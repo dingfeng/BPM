@@ -1,0 +1,97 @@
+公司类型
+name:Companytype
+columns:
+name name String 100 1
+relation:
+has Department OneToMany
+
+部门
+name:department
+columns:
+name name String 100 1
+relation；
+has position OneToMany
+
+岗位
+name:position
+columns:
+name name String 100 1
+relation；
+has Tag OneToMany
+
+标签
+name:tag
+columns:
+name name String 100 1
+relation:
+
+试题
+name: problem
+columns:
+description description String 200 1
+relation:
+companytype Companytype ManyToOne
+department Department ManyToOne
+position Position ManyToOne
+hastag Tag ManyToMany
+item Item OneToMany
+answer Item OneToOne
+
+选项
+name: item
+columns:
+item_no item_no Integer
+content	content String 255
+
+考试
+name:Exam
+columns:
+companyname companyName String 255
+begintime beginTime String 255
+endtime endTime String 255
+status status Integer 
+relation:
+problems Problem ManyToMany 
+companytype Companytype ManyToOne
+department department ManyToOne
+position Position ManyToOne
+hastag Tag ManyToMany
+jobseekeranswerrecord Jobseekeranswerrecord OneToMany
+
+用户
+name:User
+columns:
+account account String 255
+password password String 255
+type type Integer
+relation:
+publishedexam Exam OneToMany
+
+答题记录
+name:Jobseekeranswerrecord
+columns:
+jobseekerid jobSeekerId Long
+examid examId Long
+relation:
+jobseeker JobSeeker ManyToOne
+hasitem Item ManyToMany
+
+求职者:
+name:Jobseeker
+columns:
+name name String 255
+password password String 255
+phone phone String 50
+education education String 100
+email email String 100
+gender gender String 50
+major major String 100
+gtime gtime String 100
+school school String 100
+
+
+
+
+
+
+

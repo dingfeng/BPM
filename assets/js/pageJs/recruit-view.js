@@ -95,7 +95,7 @@ function addTableRow(order, exam) {
 
     } else if (statusStr == "已发布") {
         //取消发布的动作
-        operationA = getA("取消发布");
+        operationA = getA("撤回");
         $(operationTd).append(operationA);
         $(operationA).click(function () {
             console.log("取消发布考试");
