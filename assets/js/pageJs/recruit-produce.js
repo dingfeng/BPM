@@ -163,7 +163,7 @@ $("#submitButton").click(function () {
     newPaper["problems"] = allProblems;
     var companyTypeId = $("#companyType").val();
     console.log("companyTypeId=" + companyTypeId);
-    newPaper["companyType"] = {"id": companyTypeId};
+    newPaper["companytype"] = {"id": companyTypeId};
     var departmentId = $("#department").val();
     console.log("departmentId=" + departmentId);
     newPaper["department"] = {"id": departmentId};
@@ -181,8 +181,8 @@ $("#submitButton").click(function () {
 
     //获取公司名称 属性
     var companyName = $("input[name='companyName']").val();
-    console.log("companyName=" + companyName);
-    newPaper["companyName"] = companyName;
+    console.log("companyname=" + companyName);
+    newPaper["companyname"] = companyName;
     //获取试卷题目
     var title = $("input[name='title']").val();
     console.log("title=" + title);
@@ -198,12 +198,17 @@ $("#submitButton").click(function () {
     var endDateArray = endDate.split("/");
     endDate = endDateArray[2] + "-" + endDateArray[0] + "-" + endDateArray[1];
     var endTime = endDate + " " + inputValueArray[5] + ":00";
-    console.log("beginTime=" + beginTime + " endTime=" + endTime);
-    newPaper["beginTime"] = beginTime;
-    newPaper["endTime"] = endTime;
+    console.log("begintime=" + beginTime + " endtime=" + endTime);
+    newPaper["begintime"] = beginTime;
+    newPaper["endtime"] = endTime;
     //设置考试人数
-    newPaper["personCount"] = 0;
-    createEntity("Exam", newPaper);
+    newPaper["personcount"] = 0;
+    newPaper["status"] = 0;
+    var exam=createEntity("Exam", newPaper);
+    var user = getEntityById("User", uid);
+    var exams = user["publishedexam"];
+    exams.push(exam);
+    updateEntity("User",user);
 });
 
 
