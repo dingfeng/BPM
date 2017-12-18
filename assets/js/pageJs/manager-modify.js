@@ -1,4 +1,3 @@
-domain = "http://106.14.222.99:8080/Entity/U1c601c1d10384f/test3/";
 problem = {};
 selectData = {};
 globalCompanyType = {};

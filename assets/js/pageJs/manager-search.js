@@ -62,7 +62,6 @@ var searchTemplate = '<div class="col-md-3 col-sm-3"></div>\n' +
     '                </div>\n' +
     '                <div class="col-md-3 col-sm-3"><button type="submit" class="btn btn-default" id="empty">修改</button></div>';
 allProblems = [];
-domain = "http://106.14.222.99:8080/Entity/U1c601c1d10384f/test3/";
 
 //请求所有的problem
 var problemUrl = domain + "Problem/"

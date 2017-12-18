@@ -1,4 +1,3 @@
-domain = "http://106.14.222.99:8080/Entity/U1c601c1d10384f/test3/";
 $("button").click(function () {
     var input = $("input[name='filename']")[0];
     var file = input.files[0];
@@ -54,23 +53,7 @@ function addProblem(problem) {
     createEntity("Problem", createProblem);
 }
 
-function createEntity(tableName, data) {
-    var returnResult = {};
-    var url = domain + tableName + "/";
-    $.ajax({
-        type: 'POST',
-        url: url,
-        data: JSON.stringify(data),
-        success: function (result, status) {
-            console.log("创建成功 result=" + JSON.stringify(result));
-            returnResult = result;
-        },
-        dataType: "json",
-        contentType: "application/json",
-        async: false
-    });
-    return returnResult;
-}
+
 
 function getIdByName(tableName, name) {
     var returnResult = {};

@@ -82,42 +82,48 @@ font-size: 16px;">  &nbsp; <a href="#" class="btn btn-danger square-btn-adjust">
                         <div class="panel-body">
                             <div class="row">
                                 <form role="form">
-                                <div class="form-group">
-                                    <label>&nbsp;公司类型</label>
-                                    <select class="form-control">
-                                        <option>互联网公司</option>
-                                        <option>广告公司</option>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label>&nbsp;部门</label>
-                                    <select class="form-control">
-                                        <option>研发部</option>
-                                        <option>产品部</option>
-                                        <option>设计部</option>
-                                        <option>游戏部</option>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label>&nbsp;岗位</label>
-                                    <select class="form-control">
-                                        <option>研发工程师Java</option>
-                                        <option>前端开发工程师</option>
-                                        <option>安全工程师</option>
-                                        <option>测试开发工程师</option>
-                                    </select>
-                                </div>
                                     <div class="form-group">
+                                        <label> &nbsp;标题</label>
+                                        <input name="title" type="text" class="form-control" placeholder="请输入试卷标题" />
+                                        <br/>
+                                        <label> &nbsp;公司名称</label>
+                                        <input name="companyName" type="text" class="form-control" placeholder="请输入公司名称" />
+                                        <br/>
+                                        <label> &nbsp;公司类型</label>
+                                        <select class="form-control" id="companyType">
+                                            <option>互联网公司</option>
+                                            <option>广告公司</option>
+                                        </select>
+                                        <br/>
+                                        <label>&nbsp;部门</label>
+                                        <select class="form-control" id="department">
+                                            <option>研发部</option>
+                                            <option>产品部</option>
+                                            <option>设计部</option>
+                                            <option>游戏部</option>
+                                        </select>
+
+                                        <br/>
                                         <label>&nbsp;岗位</label>
-                                        <select class="form-control">
+                                        <select class="form-control" id="position">
                                             <option>研发工程师Java</option>
                                             <option>前端开发工程师</option>
                                             <option>安全工程师</option>
                                             <option>测试开发工程师</option>
                                         </select>
+
+                                        <br/>
+                                        <label>&nbsp;标签（可多选）</label>
+                                        <select multiple class="form-control" id="tags">
+                                            <option>栈</option>
+                                            <option>堆</option>
+                                            <option>多线程</option>
+                                            <option>锁</option>
+                                            <option>jvm</option>
+                                        </select>
                                     </div>
                                     <div class="form-group">
-                                        <label class="control-label" for="reservationtime">&nbsp;考试时间</label>
+                                        <label class="control-label" for="reservationtime">&nbsp;&nbsp;考试时间</label>
                                         <div class="controls">
                                             <div class="input-prepend input-group">
                                                 <span class="add-on input-group-addon"><i class="glyphicon glyphicon-calendar fa fa-calendar"></i></span>
@@ -136,9 +142,8 @@ font-size: 16px;">  &nbsp; <a href="#" class="btn btn-danger square-btn-adjust">
                                                 });
                                         </script>
                                     </div>
-
-                                <button type="submit" class="btn btn-default">提交</button>
-                                <button type="reset" class="btn btn-primary">重置</button>
+                                    <button type="reset" class="btn btn-default">重置</button>
+                                    <button id="submitButton"type="submit" class="btn btn-default">提交</button>
                           </form>
                         </div>
                     </div>
@@ -153,8 +158,10 @@ font-size: 16px;">  &nbsp; <a href="#" class="btn btn-danger square-btn-adjust">
 <!-- /. WRAPPER  -->
 <!-- SCRIPTS -AT THE BOTOM TO REDUCE THE LOAD TIME-->
 <!-- JQUERY SCRIPTS -->
-
-
+</div>
+<!-- USER SCRIPTS -->
+<script src="assets/js/pageJs/bpm-common.js"></script>
+<script src="assets/js/pageJs/recruit-produce.js"></script>
 
 </body>
 </html>
