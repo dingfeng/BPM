@@ -159,6 +159,7 @@ $("#submitButton").click(function () {
     var newPaper = {};
     //题目 公司类型 部门 岗位 标签  关系
     var allProblems = getEntity("Problem");
+    allProblems = filterDeleted(allProblems);
     console.log("allProblems=" + JSON.stringify(allProblems));
     newPaper["problems"] = allProblems;//[allProblems[0]];
     var companyTypeId = $("#companyType").val();

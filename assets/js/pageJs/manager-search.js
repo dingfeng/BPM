@@ -64,11 +64,12 @@ var searchTemplate = '<div class="col-md-3 col-sm-3"></div>\n' +
 allProblems = [];
 
 //请求所有的problem
-var problemUrl = domain + "Problem/?Problem.exist=1"
+var problemUrl = domain + "Problem/"
 $.get(problemUrl, function (data, status) {
     if (status == "success") {
         console.log("data=" + JSON.stringify(data));
         allProblems = data["Problem"];
+        allProblems=filterDeleted(allProblems);
     }
 }, dataType = "json");
 
