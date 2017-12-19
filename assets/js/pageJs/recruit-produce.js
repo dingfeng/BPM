@@ -160,7 +160,7 @@ $("#submitButton").click(function () {
     //题目 公司类型 部门 岗位 标签  关系
     var allProblems = getEntity("Problem");
     console.log("allProblems=" + JSON.stringify(allProblems));
-    newPaper["problems"] = [allProblems[0]];
+    newPaper["problems"] = allProblems;//[allProblems[0]];
     var companyTypeId = $("#companyType").val();
     console.log("companyTypeId=" + companyTypeId);
     newPaper["companytype"] = {"id": companyTypeId};
@@ -204,11 +204,12 @@ $("#submitButton").click(function () {
     //设置考试人数
     newPaper["personcount"] = 0;
     newPaper["status"] = 0;
-    var exam=createEntity("Exam", newPaper);
+    newPaper["exist"] = 1;
+    var exam = createEntity("Exam", newPaper);
     var user = getEntityById("User", uid);
     var exams = user["publishedexam"];
     exams.push(exam);
-    updateEntity("User",user);
+    updateEntity("User", user);
 });
 
 

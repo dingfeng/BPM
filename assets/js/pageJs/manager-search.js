@@ -60,11 +60,11 @@ var searchTemplate = '<div class="col-md-3 col-sm-3"></div>\n' +
     '                        </div>\n' +
     '                    </div>\n' +
     '                </div>\n' +
-    '                <div class="col-md-3 col-sm-3"><button type="submit" class="btn btn-default" id="empty">修改</button></div>';
+    '                <div class="col-md-3 col-sm-3"><button type="submit" class="btn btn-default" id="empty">修改</button> <button  class="btn btn-default" id="emptyDelete">删除</button></div>';
 allProblems = [];
 
 //请求所有的problem
-var problemUrl = domain + "Problem/"
+var problemUrl = domain + "Problem/?Problem.exist=1"
 $.get(problemUrl, function (data, status) {
     if (status == "success") {
         console.log("data=" + JSON.stringify(data));
@@ -73,6 +73,7 @@ $.get(problemUrl, function (data, status) {
 }, dataType = "json");
 
 tabPageCount = 0;
+
 function createSearchResult(searchedProblem) {
     var element = document.createElement("div");
     $("#page-inner").append(element);
@@ -138,11 +139,19 @@ function createSearchResult(searchedProblem) {
             window.location.href = "manager-modify.html?id=" + searchedProblem["id"];
         }
     );
+    var deleteButton = $("#emptyDelete");
+    deleteButton.removeAttr("id");
+    deleteButton.click(function () {
+        //删除
+        deleteById("Problem", searchedProblem["id"]);
+        alert("删除成功！");
+        window.location.reload();
+    });
 }
 
 
 $("#searchButton").click(function () {
-    console.log("lll");
+    console.log("搜索");
     var searchText = $("input[name='searchInput']").val();
     var searchedProblems = [];
     $(".searchrow").remove();

@@ -1,4 +1,5 @@
-examId = 1513666045525;
+examId = getUrlParam("examId");
+console.log("examId=" + examId);
 exam = {};
 answers = [];
 

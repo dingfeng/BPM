@@ -365,6 +365,7 @@ $("#submit").click(function () {
         hastag.push({"id": tagId});
     }
     problem["hastag"] = hastag;
+    problem["exist"] = 1;
     $.ajax({
         type: 'POST',
         url: domain + "Problem/",

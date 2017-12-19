@@ -117,6 +117,15 @@ function addTableRow(order, exam) {
     } else {
         $(resultTd).text("无结果");
     }
+    var deleteTd = createTd("");
+    $(tr).append(deleteTd);
+    var deleteA = getA("删除");
+    $(deleteTd).append(deleteA);
+    $(deleteA).click(function () {
+        //删除试卷
+        deleteById("Exam", exam["id"]);
+        window.location.reload();
+    });
 }
 
 
@@ -124,6 +133,7 @@ $(function () {
     //获取该用户下的发布的试卷
     var user = getEntityById("User", uid);
     var exams = user["publishedexam"];
+    exams = filterDeleted(exams);
     var examsLen = exams.length;
     for (var i = examsLen - 1; i >= 0; --i) {
         var exam = exams[i];

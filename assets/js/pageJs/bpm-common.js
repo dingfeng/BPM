@@ -1,5 +1,6 @@
 domain = "http://106.14.222.99:8080/Entity/U1c601c1d10384f/test3/";
-uid=1513576754080;
+uid = 1513576754080;
+
 function createEntity(tableName, data) {
     var returnResult = {};
     var url = domain + tableName + "/";
@@ -18,10 +19,9 @@ function createEntity(tableName, data) {
     return returnResult;
 }
 
-function  updateEntity(tableName,data)
-{
+function updateEntity(tableName, data) {
     var returnResult = {};
-    var url = domain + tableName + "/"+data["id"];
+    var url = domain + tableName + "/" + data["id"];
     $.ajax({
         type: 'PUT',
         url: url,
@@ -52,9 +52,8 @@ function getEntity(tableName) {
     return returnResult[tableName];
 }
 
-function getEntityById(tableName,entityId)
-{
-    var url = domain + tableName + "/"+entityId;
+function getEntityById(tableName, entityId) {
+    var url = domain + tableName + "/" + entityId;
     $.ajax({
         type: 'GET',
         url: url,
@@ -94,4 +93,21 @@ function getUrlParam(name) {
     var r = window.location.search.substr(1).match(reg);  //匹配目标参数
     if (r != null) return unescape(r[2]);
     return null; //返回参数值
+}
+
+function deleteById(tableName, id) {
+    var data = getEntityById(tableName, id);
+    data["exist"] = 0;
+    updateEntity(tableName, data);
+}
+
+function filterDeleted(array) {
+    var newArray = [];
+    for (var i in array) {
+        var element = array[i];
+        if (element["exist"] == 1 || element["exist"] == undefined) {
+            newArray.push(element);
+        }
+    }
+    return newArray;
 }

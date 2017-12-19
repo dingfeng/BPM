@@ -50,9 +50,9 @@ function addProblem(problem) {
         tagIds.push({"id": tagId});
     }
     createProblem["hastag"] = tagIds;
+    createProblem["exist"] = 1;
     createEntity("Problem", createProblem);
 }
-
 
 
 function getIdByName(tableName, name) {
