@@ -160,7 +160,7 @@ $("#submitButton").click(function () {
     //题目 公司类型 部门 岗位 标签  关系
     var allProblems = getEntity("Problem");
     console.log("allProblems=" + JSON.stringify(allProblems));
-    newPaper["problems"] = allProblems;
+    newPaper["problems"] = [allProblems[0]];
     var companyTypeId = $("#companyType").val();
     console.log("companyTypeId=" + companyTypeId);
     newPaper["companytype"] = {"id": companyTypeId};
