@@ -121,7 +121,7 @@ $(function () {
                 jobSeekerCorrectCount++;
             }
         }
-        var score = parseInt(100 * jobSeekerCorrectCount / problems.length);
+        var score = (100 * jobSeekerCorrectCount / problems.length).toFixed(1);
         tableRow.score = score;
         scores.push(tableRow);
     }
