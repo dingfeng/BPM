@@ -45,7 +45,7 @@ function resetSelects() {
                                     for (var m in position["has"]) {
                                         var tag = position["has"][m];
                                         var tagOption = document.createElement("option");
-                                        $("#tags").appendChild(tagOption);
+                                        $("#tags").append(tagOption);
                                         $(tagOption).val(tag["id"]);
                                         $(tagOption).text(tag["name"]);
                                     }
