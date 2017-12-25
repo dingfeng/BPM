@@ -81,7 +81,7 @@ function addTableRow(order, exam) {
     var operationTd = createTd("");
     $(tr).append(operationTd);
     var operationA = null;
-    if (statusStr == "未发布") {
+    if (statusStr == "未发布" || status==0) {
         //发布动作
         operationA = getA("发布");
         $(operationTd).append(operationA);
