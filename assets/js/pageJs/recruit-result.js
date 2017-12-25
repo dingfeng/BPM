@@ -81,7 +81,7 @@ $(function () {
     for (var i = 0; i < total; ++i) {
         var answerRecord = jobseekeranswerrecords[i];
         var hasItem = answerRecord["hasitem"];
-        for (var j = 0; i < hasItem.length; ++i) {
+        for (var j = 0; j < hasItem.length; ++j) {
             var itemId = hasItem[j]["id"];
             if (itemId == correctAnswerIds[j]) {
                 correctCounts[j]++;
