@@ -46,7 +46,7 @@ function resetSelects() {
                                     for (var m in position["has"]) {
                                         var tag = position["has"][m];
                                         var tagOption = document.createElement("option");
-                                        $("#tags").appendChild(tagOption);
+                                        $("#tags").append(tagOption);
                                         $(tagOption).val(tag["id"]);
                                         $(tagOption).text(tag["name"]);
                                     }
@@ -160,8 +160,14 @@ $("#submitButton").click(function () {
     //题目 公司类型 部门 岗位 标签  关系
     var allProblems = getEntity("Problem");
     allProblems = filterDeleted(allProblems);
-    console.log("allProblems=" + JSON.stringify(allProblems));
-    newPaper["problems"] = allProblems;//[allProblems[0]];
+    var problemCount = 10;
+    var problemLen = Math.min(problemCount, allProblems.length);
+    var usedProblems = [];
+    for (var i = 0; i < problemLen; ++i) {
+        usedProblems.push(allProblems[i]);
+    }
+    console.log("usedProblems=" + JSON.stringify(usedProblems));
+    newPaper["problems"] = usedProblems;//[allProblems[0]];
     var companyTypeId = $("#companyType").val();
     console.log("companyTypeId=" + companyTypeId);
     newPaper["companytype"] = {"id": companyTypeId};

@@ -69,13 +69,14 @@ $.get(problemUrl, function (data, status) {
     if (status == "success") {
         console.log("data=" + JSON.stringify(data));
         allProblems = data["Problem"];
-        allProblems=filterDeleted(allProblems);
+        allProblems = filterDeleted(allProblems);
     }
 }, dataType = "json");
 
 tabPageCount = 0;
 
 function createSearchResult(searchedProblem) {
+    console.log("problem: " + JSON.stringify(searchedProblem))
     var element = document.createElement("div");
     $("#page-inner").append(element);
     $(element).addClass("row");
@@ -98,18 +99,38 @@ function createSearchResult(searchedProblem) {
     var descriptionElement = $("#emptyDescription");
     descriptionElement.text(searchedProblem["description"]);
     descriptionElement.removeAttr("id");
-    var itemAElement = $("#emptyItemA");
-    itemAElement.text(searchedProblem["item"][0]["content"]);
-    itemAElement.removeAttr("id");
-    var itemBElement = $("#emptyItemB");
-    itemBElement.text(searchedProblem["item"][1]["content"]);
-    itemBElement.removeAttr("id");
-    var itemCElement = $("#emptyItemC");
-    itemCElement.text(searchedProblem["item"][2]["content"]);
-    itemCElement.removeAttr("id");
-    var itemDElement = $("#emptyItemD");
-    itemDElement.text(searchedProblem["item"][3]["content"]);
-    itemDElement.removeAttr("id");
+    var itemElementsIds = ["#emptyItemA", "#emptyItemB", "#emptyItemC", "#emptyItemD"];
+    // var itemAElement = $("#emptyItemA");
+    // if (searchedProblem["item"][0])
+    //     itemAElement.text(searchedProblem["item"][0]);
+    // itemAElement.removeAttr("id");
+    // var itemBElement = $("#emptyItemB");
+    // if (searchedProblem["item"][1])
+    //     itemBElement.text(searchedProblem["item"][1]);
+    // itemBElement.removeAttr("id");
+    // var itemCElement = $("#emptyItemC");
+    // if (searchedProblem["item"][2])
+    //     itemCElement.text(searchedProblem["item"][2]);
+    // itemCElement.removeAttr("id");
+    // var itemDElement = $("#emptyItemD");
+    // if (searchedProblem["item"][3])
+    //     itemDElement.text(searchedProblem["item"][3]);
+    // itemDElement.removeAttr("id");
+    var searchedProblemItems = searchedProblem["item"];
+    for (var i in searchedProblemItems) {
+        var item = searchedProblemItems[i];
+        var itemNo = item["item_no"];
+        var itemAElement = $(itemElementsIds[itemNo]);
+        itemAElement.text(item["content"]);
+    }
+
+    for (var i in itemElementsIds) {
+        var itemElementId = itemElementsIds[i];
+        var itemDElement = $(itemElementId);
+        itemDElement.removeAttr("id");
+    }
+
+
     var companyType = searchedProblem["companytype"]["name"];
     var companyTypeElement = $("#emptyCompanyType");
     companyTypeElement.text(companyType);
