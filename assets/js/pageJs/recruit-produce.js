@@ -164,7 +164,9 @@ $("#submitButton").click(function () {
     var problemLen = Math.min(problemCount, allProblems.length);
     var usedProblems = [];
     for (var i = 0; i < problemLen; ++i) {
-        usedProblems.push(allProblems[i]);
+        var num = Math.floor(Math.random() * allProblems.length);
+        usedProblems.push(allProblems[num]);
+        allProblems.splice(num, 1);
     }
     console.log("usedProblems=" + JSON.stringify(usedProblems));
     newPaper["problems"] = usedProblems;//[allProblems[0]];
@@ -217,6 +219,7 @@ $("#submitButton").click(function () {
     var exams = user["publishedexam"];
     exams.push(exam);
     updateEntity("User", user);
+    alert("生成成功！")
 });
 
 
