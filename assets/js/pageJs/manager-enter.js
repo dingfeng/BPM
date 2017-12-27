@@ -374,7 +374,7 @@ $("#submit").click(function () {
             if (status == "success") {
                 console.log("succeed to add item result = " + JSON.stringify(result));
                 alert("添加成功");
-                window.location.reload();
+                reload();
             }
         },
         dataType: "json",

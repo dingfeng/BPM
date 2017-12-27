@@ -219,7 +219,8 @@ $("#submitButton").click(function () {
     var exams = user["publishedexam"];
     exams.push(exam);
     updateEntity("User", user);
-    alert("生成成功！")
+    alert("生成成功！");
+    reload();
 });
 
 

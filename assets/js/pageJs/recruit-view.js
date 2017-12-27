@@ -90,7 +90,8 @@ function addTableRow(order, exam) {
             //发布
             exam["status"] = 1;
             updateEntity("Exam", exam);
-            window.location.reload();
+            alert("发布成功");
+            reload();
         });
 
     } else if (statusStr == "已发布") {
@@ -102,7 +103,9 @@ function addTableRow(order, exam) {
             //取消发布
             exam["status"] = 0;
             updateEntity("Exam", exam);
-            window.location.reload();
+            alert("取消成功");
+            reload();
+            //window.location.reload();
         });
     } else {
         //无操作

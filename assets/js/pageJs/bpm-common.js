@@ -19,7 +19,7 @@ function createEntity(tableName, data) {
     return returnResult;
 }
 
-function updateEntity(tableName, data) {
+function updateEntity(tableName, data,callback) {
     var returnResult = {};
     var url = domain + tableName + "/" + data["id"];
     $.ajax({
@@ -110,4 +110,12 @@ function filterDeleted(array) {
         }
     }
     return newArray;
+}
+
+window.alert=function (message) {
+    $().toastmessage('showSuccessToast', message);
+}
+
+function  reload() {
+    setTimeout("window.location.reload()",2000)
 }
