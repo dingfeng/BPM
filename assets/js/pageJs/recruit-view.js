@@ -124,7 +124,7 @@ function addTableRow(order, exam) {
     $(deleteA).click(function () {
         //删除试卷
         deleteById("Exam", exam["id"]);
-        window.location.reload();
+        $(this).parent().parent().remove();
     });
 }
 
