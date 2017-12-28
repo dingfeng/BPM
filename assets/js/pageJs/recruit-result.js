@@ -143,6 +143,8 @@ $(function () {
         scoreBins.push(0);
         scoreBinDescriptions.push([i - 10, " ~ ", i].join(""));
     }
+    scoreBinDescriptions.push("100");
+    scoreBins.push(0);
     for (var scoreIndex in scoreAmounts) {
         var score = scoreAmounts[scoreIndex];
         scoreBins[score / 10] += 1;
@@ -151,7 +153,7 @@ $(function () {
     for (var i = 0; i < scoreBinDescriptions.length; i++) {
         data1.push({
             label: scoreBinDescriptions[i],
-            value: scoreBins[i]
+            value: parseInt(scoreBins[i])
         });
     }
 
