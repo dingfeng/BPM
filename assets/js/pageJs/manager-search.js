@@ -36,7 +36,7 @@ var searchTemplate = '<div class="col-md-3 col-sm-3"></div>\n' +
     '                                    </div>\n' +
     '                                </div>\n' +
     '                                <div class="tab-pane fade" id="answer-pills">\n' +
-    '                                    <p>C</p>\n' +
+    '                                    <p id="emptyAnswer">C</p>\n' +
     '                                </div>\n' +
     '                                <div class="tab-pane fade " id="settings-pills">\n' +
     '                                    <div class="row">\n' +
@@ -115,6 +115,11 @@ function createSearchResult(searchedProblem) {
         itemDElement.removeAttr("id");
     }
 
+    var answerStrs=['A','B','C','D'];
+    var answerNo=searchedProblem["answer"]["item_no"];
+    var answerStr=answerStrs[answerNo];
+    $("#emptyAnswer").text(answerStr);
+    $("#emptyAnswer").removeAttr("id");
 
     var companyType = searchedProblem["companytype"]["name"];
     var companyTypeElement = $("#emptyCompanyType");
