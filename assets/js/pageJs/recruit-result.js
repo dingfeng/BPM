@@ -148,7 +148,7 @@ $(function () {
         scoreBins[score / 10] += 1;
     }
     var data1 = [];
-    for (var i = 0; i < scores.length; i++) {
+    for (var i = 0; i < scoreBinDescriptions.length; i++) {
         data1.push({
             label: scoreBinDescriptions[i],
             value: scoreBins[i]
