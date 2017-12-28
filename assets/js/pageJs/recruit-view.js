@@ -91,7 +91,7 @@ function addTableRow(order, exam) {
             exam["status"] = 1;
             updateEntity("Exam", exam);
             alert("发布成功");
-            reload();
+            reloadData();
         });
 
     } else if (statusStr == "已发布") {
@@ -104,7 +104,7 @@ function addTableRow(order, exam) {
             exam["status"] = 0;
             updateEntity("Exam", exam);
             alert("取消成功");
-            reload();
+            reloadData();
             //window.location.reload();
         });
     } else {
@@ -128,29 +128,51 @@ function addTableRow(order, exam) {
         //删除试卷
         deleteById("Exam", exam["id"]);
         $(this).parent().parent().remove();
+        localRemoveExam(exam["id"]);
+        alert("删除成功");
     });
 }
 
+exams=undefined
+
+function reloadData()
+{
+    $("#tableBody").html("");
+    var examsLen = exams.length;
+    for (var i = examsLen - 1; i >= 0; --i) {
+        var exam = exams[i];
+        addTableRow(examsLen - i, exam);
+    }
+}
+
+
+function localRemoveExam(id)
+{
+    for (var i in exams){
+        var exam=exams[i];
+        if(exam["id"] == id)
+        {
+            exams.splice(i,1);
+            break;
+        }
+    }
+}
 
 $(function () {
     //获取该用户下的发布的试卷
-    showProcessBar();
-    var url = domain + "User" + "/" + uid;
-    $.ajax({
-        type: 'GET',
-        url: url,
-        success: function (result, status) {
-            var user = result;
-            var exams = user["publishedexam"];
-            exams = filterDeleted(exams);
-            var examsLen = exams.length;
-            for (var i = examsLen - 1; i >= 0; --i) {
-                var exam = exams[i];
-                addTableRow(examsLen - i, exam);
-            }
-            endProcessBar();
-        },
-        dataType: "json",
-        async: true
-    });
+        showProcessBar();
+        var url = domain + "User" + "/" + uid;
+        $.ajax({
+            type: 'GET',
+            url: url,
+            success: function (result, status) {
+                var user = result;
+                exams = user["publishedexam"];
+                exams = filterDeleted(exams);
+                reloadData();
+                endProcessBar();
+            },
+            dataType: "json",
+            async: true
+        });
 });

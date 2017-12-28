@@ -77,7 +77,7 @@ $.ajax({
 });
 
 function createSearchResult(searchedProblem) {
-   // console.log("problem: " + JSON.stringify(searchedProblem))
+    // console.log("problem: " + JSON.stringify(searchedProblem))
     var element = document.createElement("div");
     $("#page-inner").append(element);
     $(element).addClass("row");
@@ -115,9 +115,9 @@ function createSearchResult(searchedProblem) {
         itemDElement.removeAttr("id");
     }
 
-    var answerStrs=['A','B','C','D'];
-    var answerNo=searchedProblem["answer"]["item_no"];
-    var answerStr=answerStrs[answerNo];
+    var answerStrs = ['A', 'B', 'C', 'D'];
+    var answerNo = searchedProblem["answer"]["item_no"];
+    var answerStr = answerStrs[answerNo];
     $("#emptyAnswer").text(answerStr);
     $("#emptyAnswer").removeAttr("id");
 
@@ -157,11 +157,45 @@ function createSearchResult(searchedProblem) {
         //删除
         deleteById("Problem", searchedProblem["id"]);
         $(this).parent().parent().remove();
-
+        localRemoveProblem(searchedProblem["id"]);
     });
 }
 
 
+
+function searchTag(problem, searchText) {
+    var tags = problem["hastag"];
+    for (var i in tags) {
+        var tag = tags[i];
+        var tagName = tag["name"];
+        if (tagName.indexOf(searchText) > -1) {
+            return true;
+        }
+    }
+    return false;
+}
+
+function searchItems(problem, searchText) {
+    var items = problem["item"];
+    for (var i in items) {
+        var item = items[i];
+        var itemContent = item["content"];
+        if (itemContent.indexOf(searchText) > -1) {
+            return true;
+        }
+    }
+    return false;
+}
+
+function localRemoveProblem(id){
+    for (var i in allProblems){
+        var problem=allProblems[i];
+        if(problem["id"] === id){
+            allProblems.splice(i,1);
+            break;
+        }
+    }
+}
 $("#searchButton").click(function () {
     console.log("搜索");
     var searchText = $("input[name='searchInput']").val();
@@ -170,7 +204,7 @@ $("#searchButton").click(function () {
     for (var i in allProblems) {
         var problem = allProblems[i];
         //不存在 string.contains 使用indexOf代替
-        if (searchText.length == 0 || problem["description"].indexOf(searchText) > -1) {
+        if (searchText.length == 0 || problem["description"].indexOf(searchText) > -1 || searchTag(problem, searchText) || searchItems(problem, searchText)) {
             createSearchResult(problem);
         }
     }

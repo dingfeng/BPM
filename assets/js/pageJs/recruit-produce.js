@@ -154,17 +154,32 @@ $("#position").change(function () {
     positionChanged();
 });
 
+allProblems = undefined
+var url = domain + "Problem" + "/";
+$.ajax({
+    type: 'GET',
+    url: url,
+    success: function (result, status) {
+        allProblems = result["Problem"];
+        allProblems = filterDeleted(allProblems);
+        console.log("getProblem");
+    },
+    dataType: "json",
+    async: true
+});
+
 function submitClicked() {
     var newPaper = {};
     //题目 公司类型 部门 岗位 标签  关系
-    var allProblems = getEntity("Problem");
-    allProblems = filterDeleted(allProblems);
+    while (!allProblems) {
+    }
     var problemCount = 10;
     var problemLen = Math.min(problemCount, allProblems.length);
     var usedProblems = [];
     for (var i = 0; i < problemLen; ++i) {
         var num = Math.floor(Math.random() * allProblems.length);
         usedProblems.push(allProblems[num]);
+        console.log("problem "+i);
         allProblems.splice(num, 1);
     }
     newPaper["problems"] = usedProblems;//[allProblems[0]];
@@ -213,11 +228,12 @@ function submitClicked() {
     alert("生成成功！");
     reload();
 }
+
 $("#submitButton").click(function () {
-   $("#resetButton").remove();
-    $(this).attr("disabled","true");
+    $("#resetButton").remove();
+    $(this).attr("disabled", "true");
     $(this).text("请稍等...");
-    setTimeout("submitClicked()",1000);
+    setTimeout("submitClicked()", 1000);
 });
 
 
