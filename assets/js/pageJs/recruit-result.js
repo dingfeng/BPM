@@ -106,6 +106,7 @@ $(function () {
     });
     //修改排行榜
     var scores = [];
+    var scoreAmounts=[];
     for (var i = 0; i < total; ++i) {
         var tableRow = {order: 0, name: "", contact: "", score: 0, recordId: 0};
         var answerRecord = jobseekeranswerrecords[i];
@@ -122,6 +123,7 @@ $(function () {
             }
         }
         var score = (100 * jobSeekerCorrectCount / problems.length).toFixed(1);
+        scoreAmounts.push(score);
         tableRow.score = score;
         scores.push(tableRow);
     }
@@ -133,5 +135,31 @@ $(function () {
         addRow(scores[i]);
     }
 
+    //统计分数段
+    scoreBins = [];
+    scoreBinDescriptions = [];
+
+    for (var i = 10; i <= 100; i += 10) {
+        scoreBins.push(0);
+        scoreBinDescriptions.push([i - 10, " ~ ", i].join(""));
+    }
+    for (var scoreIndex in scoreAmounts) {
+        var score = scoreAmounts[scoreIndex];
+        scoreBins[score / 10] += 1;
+    }
+    var data1 = [];
+    for (var i = 0; i < scores.length; i++) {
+        data1.push({
+            label: scoreBinDescriptions[i],
+            value: scoreBins[i]
+        });
+    }
+
+    Morris.Donut({
+        element: 'morris-donut-chart',
+        data: data1,
+        resize: true
+    });
 
 });
+
