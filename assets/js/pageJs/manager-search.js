@@ -63,9 +63,18 @@ var searchTemplate = '<div class="col-md-3 col-sm-3"></div>\n' +
     '                <div class="col-md-3 col-sm-3"><button type="submit" class="btn btn-default" id="empty">修改</button> <button  class="btn btn-default" id="emptyDelete">删除</button></div>';
 
 //请求所有的problem
-allProblems=getEntity("Problem");
-allProblems = filterDeleted(allProblems);
 tabPageCount = 0;
+var url = domain + "Problem" + "/";
+$.ajax({
+    type: 'GET',
+    url: url,
+    success: function (result, status) {
+        allProblems = result["Problem"];
+        allProblems = filterDeleted(allProblems);
+    },
+    dataType: "json",
+    async: true
+});
 
 function createSearchResult(searchedProblem) {
    // console.log("problem: " + JSON.stringify(searchedProblem))
@@ -92,22 +101,6 @@ function createSearchResult(searchedProblem) {
     descriptionElement.text(searchedProblem["description"]);
     descriptionElement.removeAttr("id");
     var itemElementsIds = ["#emptyItemA", "#emptyItemB", "#emptyItemC", "#emptyItemD"];
-    // var itemAElement = $("#emptyItemA");
-    // if (searchedProblem["item"][0])
-    //     itemAElement.text(searchedProblem["item"][0]);
-    // itemAElement.removeAttr("id");
-    // var itemBElement = $("#emptyItemB");
-    // if (searchedProblem["item"][1])
-    //     itemBElement.text(searchedProblem["item"][1]);
-    // itemBElement.removeAttr("id");
-    // var itemCElement = $("#emptyItemC");
-    // if (searchedProblem["item"][2])
-    //     itemCElement.text(searchedProblem["item"][2]);
-    // itemCElement.removeAttr("id");
-    // var itemDElement = $("#emptyItemD");
-    // if (searchedProblem["item"][3])
-    //     itemDElement.text(searchedProblem["item"][3]);
-    // itemDElement.removeAttr("id");
     var searchedProblemItems = searchedProblem["item"];
     for (var i in searchedProblemItems) {
         var item = searchedProblemItems[i];
@@ -176,7 +169,6 @@ $("#searchButton").click(function () {
             createSearchResult(problem);
         }
     }
-
 });
 
 

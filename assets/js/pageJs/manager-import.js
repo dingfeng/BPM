@@ -1,4 +1,5 @@
 $("button").click(function () {
+    $(this).text("请稍等...");
     var input = $("input[name='filename']")[0];
     var file = input.files[0];
     filename = file.name.split(".")[0];
@@ -11,6 +12,7 @@ $("button").click(function () {
             addProblem(problem);
         }
         alert("导入成功！");
+        reload();
     }
     reader.readAsText(file);
 });

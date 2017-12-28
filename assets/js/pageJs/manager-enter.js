@@ -84,7 +84,6 @@ function companyTypeChanged() {
                 $(departmentOption).attr("value", department["id"]);
                 $(departmentOption).text(department["name"]);
                 if (j == 0) {
-                    console.log("j=" + j)
                     $("#department").val(department["id"]);
                 }
             }
@@ -320,6 +319,8 @@ function getById(tableName, id) {
 
 //提交表单
 $("#submit").click(function () {
+    $(this).text("请稍等...");
+    $("#resetButton").remove();
     var description = $("#description").val();  //描述
     var itemA = {"item_no": 0, "content": $("#ItemA").val()};
     var itemB = {"item_no": 1, "content": $("#ItemB").val()};
@@ -336,7 +337,6 @@ $("#submit").click(function () {
             data: JSON.stringify(item),
             success: function (result, status) {
                 if (status == "success") {
-                    console.log("succeed to add item result = " + JSON.stringify(result));
                     itemsAddResult.push(result);
                 }
             },
@@ -372,7 +372,6 @@ $("#submit").click(function () {
         data: JSON.stringify(problem),
         success: function (result, status) {
             if (status == "success") {
-                console.log("succeed to add item result = " + JSON.stringify(result));
                 alert("添加成功");
                 reload();
             }

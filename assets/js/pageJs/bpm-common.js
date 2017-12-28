@@ -19,7 +19,7 @@ function createEntity(tableName, data) {
     return returnResult;
 }
 
-function updateEntity(tableName, data,callback) {
+function updateEntity(tableName, data) {
     var returnResult = {};
     var url = domain + tableName + "/" + data["id"];
     $.ajax({
@@ -67,6 +67,7 @@ function getEntityById(tableName, entityId) {
     return returnResult;
 }
 
+
 Date.prototype.format = function (format) {
     var args = {
         "M+": this.getMonth() + 1,
@@ -112,10 +113,40 @@ function filterDeleted(array) {
     return newArray;
 }
 
-window.alert=function (message) {
+window.alert = function (message) {
     $().toastmessage('showSuccessToast', message);
 }
 
-function  reload() {
-    setTimeout("window.location.reload()",2000)
+function reload() {
+    setTimeout("window.location.reload()", 2000)
+}
+
+function showProcessBar() {
+    var value=2;
+    if(arguments[0]){
+        value = arguments[0];
+    }
+    $(".progress").show();
+    var st = setInterval(function(){
+        value+=value;
+        console.log("value"+value);
+        //执行的函数
+        $(".progress-bar-primary").attr("style","width: "+value+"%");
+        //实行了3次
+        if (value > 40) {
+            clearInterval(st);
+
+        }
+    },500);
+}
+
+function hideProcessBar()
+{
+    $(".progress").hide();
+    $(".progress-bar-primary").attr("style","width: "+"0");
+}
+
+function endProcessBar() {
+    $(".progress-bar-primary").attr("style","width: "+"100%");
+    setTimeout('hideProcessBar()',1000);
 }

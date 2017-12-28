@@ -154,8 +154,7 @@ $("#position").change(function () {
     positionChanged();
 });
 
-
-$("#submitButton").click(function () {
+function submitClicked() {
     var newPaper = {};
     //题目 公司类型 部门 岗位 标签  关系
     var allProblems = getEntity("Problem");
@@ -168,19 +167,14 @@ $("#submitButton").click(function () {
         usedProblems.push(allProblems[num]);
         allProblems.splice(num, 1);
     }
-    console.log("usedProblems=" + JSON.stringify(usedProblems));
     newPaper["problems"] = usedProblems;//[allProblems[0]];
     var companyTypeId = $("#companyType").val();
-    console.log("companyTypeId=" + companyTypeId);
     newPaper["companytype"] = {"id": companyTypeId};
     var departmentId = $("#department").val();
-    console.log("departmentId=" + departmentId);
     newPaper["department"] = {"id": departmentId};
     var positionId = $("#position").val();
-    console.log("positionId=" + positionId);
     newPaper["position"] = {"id": positionId};
     var tagIds = $("#tags").val();
-    console.log("tagIds=" + tagIds);
     var tags = [];
     for (var i in tagIds) {
         var tagId = tagIds[i];
@@ -190,11 +184,9 @@ $("#submitButton").click(function () {
 
     //获取公司名称 属性
     var companyName = $("input[name='companyName']").val();
-    console.log("companyname=" + companyName);
     newPaper["companyname"] = companyName;
     //获取试卷题目
     var title = $("input[name='title']").val();
-    console.log("title=" + title);
     newPaper["title"] = title;
     //获取日期  属性
     var inputValue = $("input[name='reservation']").val();
@@ -207,7 +199,6 @@ $("#submitButton").click(function () {
     var endDateArray = endDate.split("/");
     endDate = endDateArray[2] + "-" + endDateArray[0] + "-" + endDateArray[1];
     var endTime = endDate + " " + inputValueArray[5] + ":00";
-    console.log("begintime=" + beginTime + " endtime=" + endTime);
     newPaper["begintime"] = beginTime;
     newPaper["endtime"] = endTime;
     //设置考试人数
@@ -221,6 +212,12 @@ $("#submitButton").click(function () {
     updateEntity("User", user);
     alert("生成成功！");
     reload();
+}
+$("#submitButton").click(function () {
+   $("#resetButton").remove();
+    $(this).attr("disabled","true");
+    $(this).text("请稍等...");
+    setTimeout("submitClicked()",1000);
 });
 
 

@@ -29,27 +29,6 @@ function newLine() {
 }
 
 function addOneProblem(order, problem) {
-    /*var divElement = document.createElement("div");
-    var previewDiv = $("#preview");
-    previewDiv.append(divElement);
-    $(divElement).addClass("row");
-    $(divElement).html(rowTemplate);
-    var description = "" + order + ".   " + problem["description"];
-    $("#description").html("<h4>" + description + "</h4>");
-    $("#description").removeAttr("id");
-    var itemElementIds = ["#ItemA", "#ItemB", "#ItemC", "#ItemD"];
-    var orderArray = ["&nbsp;&nbsp;A.&nbsp;", "&nbsp;&nbsp;B.&nbsp;", "&nbsp;&nbsp;C.&nbsp;", "&nbsp;&nbsp;D.&nbsp;"];
-    var items = problem["item"];
-    for (var i = 0; i < 4; ++i) {
-        var order = 1;
-        var itemElementId = itemElementIds[i];
-        var item = items[i];
-        var itemNo = item["item_no"];
-        var itemElementId = itemElementIds[itemNo];
-        var itemText = orderArray[itemNo] + item["content"];
-        $(itemElementId).html("<h4>" + itemText + "</h4>");
-        $(itemElementId).removeAttr("id");
-    }*/
     var description = order + ".&nbsp;&nbsp;" + problem["description"];
     addRow(description);
     var items = problem["item"];

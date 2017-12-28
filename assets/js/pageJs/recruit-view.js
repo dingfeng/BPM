@@ -134,12 +134,23 @@ function addTableRow(order, exam) {
 
 $(function () {
     //获取该用户下的发布的试卷
-    var user = getEntityById("User", uid);
-    var exams = user["publishedexam"];
-    exams = filterDeleted(exams);
-    var examsLen = exams.length;
-    for (var i = examsLen - 1; i >= 0; --i) {
-        var exam = exams[i];
-        addTableRow(examsLen - i, exam);
-    }
+    showProcessBar();
+    var url = domain + "User" + "/" + uid;
+    $.ajax({
+        type: 'GET',
+        url: url,
+        success: function (result, status) {
+            var user = result;
+            var exams = user["publishedexam"];
+            exams = filterDeleted(exams);
+            var examsLen = exams.length;
+            for (var i = examsLen - 1; i >= 0; --i) {
+                var exam = exams[i];
+                addTableRow(examsLen - i, exam);
+            }
+            endProcessBar();
+        },
+        dataType: "json",
+        async: true
+    });
 });
